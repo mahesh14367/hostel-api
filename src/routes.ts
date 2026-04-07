@@ -5,6 +5,8 @@ import tenantRoutes from "./modules/tenant/tenant.routes";
 import paymentRoutes from "./modules/payment/payment.routes";
 import foodMenuRoutes from "./modules/food-menu/food-menu.routes";
 import complaintRoutes from "./modules/complaint/complaint.routes";
+import analyticsRoutes from "./modules/analytics/analytics.routes";
+import advancedAnalyticsRoutes from "./modules/analytics/advanced/advanced-analytics.routes";
 
 const router = express.Router();
 
@@ -24,5 +26,7 @@ router.use("/tenants", tenantRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/food-menu", foodMenuRoutes);
 router.use("/complaints", complaintRoutes);
+router.use("/analytics", analyticsRoutes);
+router.use("/advanced-analytics", advancedAnalyticsRoutes);
 
 export default router;
