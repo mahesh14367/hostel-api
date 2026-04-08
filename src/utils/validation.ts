@@ -19,14 +19,14 @@ export const tenantSchema = object({
   name: string('Name is required'),
   phone: string('Phone is required'),
   aadhaar: string('Aadhaar is required'),
-  join_date: date('Join date is required'),
+  join_date: string('Join date is required'),
   bed_id: number('Bed ID is required and must be a number')
 });
 
 export const paymentSchema = object({
   tenant_id: number('Tenant ID is required and must be a number'),
   amount: number('Amount is required and must be a number'),
-  payment_date: date('Payment date is required'),
+  payment_date: string('Payment date is required'),
   payment_mode: string('Payment mode is required'),
   status: string('Status is required')
 });
@@ -61,14 +61,14 @@ export const updateTenantSchema = object({
   name: optional(string('Name must be a string')),
   phone: optional(string('Phone must be a string')),
   aadhaar: optional(string('Aadhaar must be a string')),
-  join_date: optional(date('Join date must be a date')),
+  join_date: optional(string('Join date must be a string')),
   bed_id: optional(number('Bed ID must be a number'))
 });
 
 export const updatePaymentSchema = object({
   tenant_id: optional(number('Tenant ID must be a number')),
   amount: optional(number('Amount must be a number')),
-  payment_date: optional(date('Payment date must be a date')),
+  payment_date: optional(string('Payment date must be a string')),
   payment_mode: optional(string('Payment mode must be a string')),
   status: optional(string('Status must be a string'))
 });

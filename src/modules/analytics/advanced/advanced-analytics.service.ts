@@ -277,19 +277,19 @@ export class AdvancedSQLService {
             SELECT 
                 DATE_FORMAT(DATE_ADD(CURRENT_DATE, INTERVAL seq.month MONTH), '%Y-%m') as projected_month,
                 (
-                    SELECT SUM(r.rent * COUNT(t.tenant_id)) 
+                    SELECT SUM(r.rent) 
                     FROM ROOM r
                     JOIN BED b ON r.room_id = b.room_id
                     JOIN TENANT t ON b.bed_id = t.bed_id
                     WHERE b.status = 'occupied'
                 ) * 0.95 as projected_revenue,
                 (
-                    SELECT AVG(revenue) 
+                    SELECT COALESCE(AVG(revenue), 0) 
                     FROM financial_dashboard 
                     WHERE month >= DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH), '%Y-%m')
                 ) as average_revenue,
                 (
-                    SELECT MAX(revenue) 
+                    SELECT COALESCE(MAX(revenue), 0) 
                     FROM financial_dashboard 
                     WHERE month >= DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 12 MONTH), '%Y-%m')
                 ) as best_revenue
