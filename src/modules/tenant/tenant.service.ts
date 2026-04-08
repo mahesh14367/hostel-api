@@ -7,12 +7,14 @@ export interface Tenant {
     aadhaar: string;
     join_date: Date;
     bed_id: number;
+    bed_number?: number;
+    room_type?: string;
 }
 
 export class TenantService {
     async getAllTenants(): Promise<Tenant[]> {
         const [rows] = await pool.execute(`
-            SELECT t.*, b.bed_number, r.room_type, r.room_number
+            SELECT t.*, b.bed_number, r.room_type
             FROM TENANT t
             JOIN BED b ON t.bed_id = b.bed_id
             JOIN ROOM r ON b.room_id = r.room_id
@@ -22,7 +24,7 @@ export class TenantService {
 
     async getTenantById(tenantId: number): Promise<Tenant | null> {
         const [rows] = await pool.execute(`
-            SELECT t.*, b.bed_number, r.room_type, r.room_number
+            SELECT t.*, b.bed_number, r.room_type
             FROM TENANT t
             JOIN BED b ON t.bed_id = b.bed_id
             JOIN ROOM r ON b.room_id = r.room_id

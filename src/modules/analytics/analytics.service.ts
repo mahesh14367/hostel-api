@@ -71,7 +71,7 @@ export class AnalyticsService {
                 SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) as pending_amount,
                 SUM(CASE WHEN status = 'completed' THEN amount ELSE 0 END) as completed_amount
             FROM PAYMENT 
-            WHERE payment_date >= DATE_SUB(CURRENT_DATE, INTERVAL 12 MONTH)
+            WHERE payment_date >= '2024-01-01'
             GROUP BY DATE_FORMAT(payment_date, '%Y-%m')
             HAVING total_amount > 0
             ORDER BY month DESC
